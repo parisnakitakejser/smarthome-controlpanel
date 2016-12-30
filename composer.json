@@ -1,0 +1,13 @@
+{
+	"require": {
+		"philo/laravel-blade": "3.*",
+		"illuminate/routing": "5.3.*@dev",
+		"illuminate/events": "5.3.*@dev",
+		"swiftmailer/swiftmailer": "@stable",
+		"mongodb/mongodb": "^1.1",
+		"rych/phpass": "3.0.*@beta"
+	},
+	"config" : {
+		"vendor-dir" : "packages"
+	}
+}
