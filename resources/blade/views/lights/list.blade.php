@@ -19,10 +19,10 @@
     <tbody>
       @foreach($lights AS $light)
       <tr>
-        <td><img src="/images/philips-hue/{{$light['modelid']}}" class="img-responsive" /></td>
+        <td><img src="/images/philips-hue/{{$light['hardware']['icon']}}" class="img-responsive" /></td>
         <td>{{$light['title']}}</td>
-        <td>-</td>
-        <td>-</td>
+        <td>{{$light['hardware']['brand']}} {{$light['hardware']['modelid']}}</td>
+        <td>{{$light['room']['title']}}</td>
         <td style="text-align: right;">{{$light['updated_at']}}</td>
         <td style="text-align: center;"><i class="fa fa-2x fa-toggle-{{($light['state_on'] ? 'on text-success' : 'off text-danger')}}" aria-hidden="true"></i></td>
       </tr>
