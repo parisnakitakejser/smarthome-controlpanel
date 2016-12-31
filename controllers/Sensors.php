@@ -27,8 +27,16 @@ class Sensors {
 
       $data[] = [
         'id' => $val['_id'],
-        'title' => (isset($val['title']) ? $val['title'] : 'no name'),
-        'modelid' => '',
+        'title' => (isset($val['title']) ? $val['title'] : 'untitled'),
+        'room' => [
+          'title' => (isset($val['room']['title']) ? $val['room']['title'] : 'no room assigned'),
+          'id' => (isset($val['room']['id']) ? $val['room']['id'] : ''),
+        ],
+        'hardware' => [
+          'modelid' => isset($val['modelid']) ? $val['modelid'] : '',
+          'brand' => isset($val['brand']) ? $val['brand'] : '',
+          'icon' => ORM\Hardware\PhilipsHue::getIcon((isset($val['modelid']) ? $val['modelid'] : '')),
+        ],
         'updated_at' => $datetime->format('Y-m-d H:i:s'),
         'battery' => [
           'procent' => $val['battery'],

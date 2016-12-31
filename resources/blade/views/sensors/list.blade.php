@@ -19,10 +19,10 @@
     <tbody>
       @foreach($sensors AS $sensor)
       <tr>
-        <td>@if ($sensor['modelid'] != '') <img src="/images/philips-hue/{{$sensor['modelid']}}" class="img-responsive" /> @endif</td>
+        <td>@if ($sensor['hardware']['icon'] != '') <img src="/images/philips-hue/{{$sensor['hardware']['icon']}}" class="img-responsive" /> @endif</td>
         <td>{{$sensor['title']}}</td>
-        <td>-</td>
-        <td>-</td>
+        <td>{{$sensor['hardware']['brand']}} {{$sensor['hardware']['modelid']}}</td>
+        <td>{{$sensor['room']['title']}}</td>
         <td style="text-align: right;">{{$sensor['updated_at']}}</td>
         <td style="text-align: center;">
           <i class="fa fa-{{$sensor['battery']['icon']}} {{$sensor['battery']['class']}}" title="{{$sensor['battery']['procent']}}%" data-toggle="tooltip"></i>
