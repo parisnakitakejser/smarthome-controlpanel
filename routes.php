@@ -14,6 +14,8 @@ if(isset($_SESSION['user'])) {
 
   $app['router']->get('/sockets', 'Sockets@listAll');
 
+  $app['router']->get('/home-audios', 'HomeAudios@listAll');
+
   $app['router']->get('/users', 'Users@listAll');
 } else {
   if($_SERVER['REQUEST_URI'] != '/' && $_SERVER['REQUEST_URI'] != '/users/login' ) {

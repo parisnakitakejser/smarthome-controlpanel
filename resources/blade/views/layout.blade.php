@@ -30,6 +30,7 @@
                 <li class="nav-item"><a class="nav-link" href="/lights">Lights</a></li>
                 <li class="nav-item"><a class="nav-link" href="/sensors">Sensors</a></li>
                 <li class="nav-item"><a class="nav-link" href="/sockets">Sockets</a></li>
+                <li class="nav-item"><a class="nav-link" href="/home-audios">Home Audios</a></li>
                 <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
             </ul>
         </div>
