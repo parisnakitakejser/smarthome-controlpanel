@@ -15,6 +15,8 @@ if(isset($_SESSION['user'])) {
   $app['router']->get('/sockets', 'Sockets@listAll');
 
   $app['router']->get('/home-audios', 'HomeAudios@listAll');
+  $app['router']->post('/home-audios/handler/mute-device', 'HomeAudios@handlerMuteDevice');
+  $app['router']->post('/home-audios/handler/turn-on-device', 'HomeAudios@handlerTurnOnDevice');
 
   $app['router']->get('/users', 'Users@listAll');
 } else {

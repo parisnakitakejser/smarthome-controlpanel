@@ -41,5 +41,40 @@ class HomeAudios {
 
     return $blade->view()->make($bladeTemplate, $bladeData)->render();
   }
+
+  function handlerMuteDevice() {
+    $home_audio = ORM\MongoDB::findOne('home_audios', [
+      '_id' => new MongoDB\BSON\ObjectID($_POST['id'])
+    ]);
+
+    $response = ORM\Curl::exec([
+      'path' => 'home-audio/sonos/mute',
+      'postfield' => [
+        'ip' => $home_audio['network']['ip']
+      ]
+    ]);
+
+    $response_json = json_decode($response);
+
+    if($response_json->status == 200) {
+      return [
+        'status' => 200
+      ];
+    } else {
+      return [
+        'status' => 404,
+        'error' => [
+          'header' => 'Error!',
+          'msg' => $response_json->msg
+        ]
+      ];
+    }
+  }
+
+  function handlerTurnOnDevice() {
+    return [
+      'status' => 200
+    ];
+  }
 }
 ?>

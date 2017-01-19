@@ -22,6 +22,7 @@ elixir(function(mix) {
     'framework/ajax_callback.js',
     'lib/users.js',
     'lib/rooms.js',
+    'lib/home_audios.js',
     'app.js'
   ], 'public/javascript/app.min.js')
 });
