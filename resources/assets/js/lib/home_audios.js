@@ -1,6 +1,11 @@
 $.home_audios = {
   push: {
     mute_device: function(id) {
+      $('#mute-'+ id).html('').append(
+        $(document.createElement('i'))
+        .addClass('fa fa-spinner fa-2x fa-spin')
+      );
+      
       $('#dialogToolbar').ajax_callback('/home-audios/handler/mute-device', {
         'id' : id,
       }, {

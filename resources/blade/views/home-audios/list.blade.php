@@ -27,7 +27,7 @@
         <td>{{$home_audio['room']['title']}}</td>
         <td style="text-align: right;">{{$home_audio['updated_at']}}</td>
         <td style="text-align: center;">{{$home_audio['volume'] ? $home_audio['volume'] .'%' : '?' }}</td>
-        <td style="text-align: center;">
+        <td style="text-align: center;" id="mute-{{$home_audio['id']}}">
           <i class="fa fa-2x fa-volume-{{($home_audio['mute'] ? 'off text-danger' : 'up text-success')}}" aria-hidden="true" onclick="$.home_audios.push.mute_device('{{$home_audio['id']}}')" style="cursor: pointer;"></i>
         </td>
         <td style="text-align: center;">
