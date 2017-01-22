@@ -4,7 +4,7 @@ ini_set('display_errors', '1');
 date_default_timezone_set('Europe/Copenhagen');
 session_start();
 
-$basePath = str_finish(dirname(__FILE__), '/');
+$basePath = dirname(__FILE__) .'/';
 
 # Path setup
 define('ROOT_PATH', $basePath );
@@ -16,6 +16,9 @@ define('ORM_PATH' , RESOURCES_PATH .'orm/');
 define( 'MONGODB_DB_HOST' , 'localhost' );
 define( 'MONGODB_DB_PORT' , '27017' );
 define( 'MONGODB_DB_NAME' , 'smarthome' );
+
+# Smarthome API server
+define( 'SMARTHOME_API_HOST' , '{api-host}' );
 
 # Mail settings - config
 define('MAIL_SMTP_SERVER', '{smtp-server}');

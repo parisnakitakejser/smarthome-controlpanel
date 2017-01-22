@@ -1,5 +1,6 @@
 <?php
 require_once( substr_replace( dirname(__FILE__)  ,"",-11) .'/config.php');
+include_once $basePath .'packages/autoload.php';
 
 $argvs = [];
 
