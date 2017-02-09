@@ -42,6 +42,46 @@ class HomeAudios {
     return $blade->view()->make($bladeTemplate, $bladeData)->render();
   }
 
+  function view($id) {
+    $data = [];
+
+    $home_audio = ORM\MongoDB::findOne('home_audios', [
+      '_id' => new MongoDB\BSON\ObjectID($id)
+    ]);
+
+    $data = [
+      'id' => $id,
+      'device' => [
+        'title' => $home_audio['title'],
+        'brand' => $home_audio['device']['brand'],
+        'model' => $home_audio['device']['modelid'],
+        'uniqueid' => $home_audio['uniqueid'],
+        'hardware_version' => $home_audio['device']['hardware_version'],
+        'software_version' => $home_audio['device']['software_version']
+      ],
+      'network' => [
+        'ip' => $home_audio['network']['ip'],
+        'mac_address' => $home_audio['network']['mac_address']
+      ],
+      'control' => [
+        'mute' => (int) $home_audio['control']['mute'],
+        'power' => (int) $home_audio['control']['status_light'],
+        'volume' => $home_audio['control']['volume'],
+      ]
+    ];
+
+    $blade = new Philo\Blade\Blade(BLADE_VIEWS, BLADE_CACHE);
+    $bladeTemplate = 'home-audios.view';
+    $bladeData = [
+      'meta' => [
+        'title' => 'Smarthome'
+      ],
+      'home_audio' => $data
+    ];
+
+    return $blade->view()->make($bladeTemplate, $bladeData)->render();
+  }
+
   function handlerMuteDevice() {
     $home_audio = ORM\MongoDB::findOne('home_audios', [
       '_id' => new MongoDB\BSON\ObjectID($_POST['id'])
@@ -74,6 +114,33 @@ class HomeAudios {
   function handlerTurnOnDevice() {
     return [
       'status' => 200
+    ];
+  }
+
+  function handlerControlAction() {
+    $home_audio = ORM\MongoDB::findOne('home_audios', [
+      '_id' => new MongoDB\BSON\ObjectID($_POST['id'])
+    ]);
+
+    $response = ORM\Curl::exec([
+      'path' => 'home-audio/sonos/control-action',
+      'postfield' => [
+        'method' => $_POST['method'],
+        'value' => $_POST['value'],
+        'ip' => $home_audio['network']['ip'],
+      ]
+    ]);
+
+    $response_json = json_decode($response);
+
+    if($response_json->status == 200) {
+      $status = 200;
+    } else {
+      $status = 404;
+    }
+
+    return [
+      'status' => $status
     ];
   }
 }

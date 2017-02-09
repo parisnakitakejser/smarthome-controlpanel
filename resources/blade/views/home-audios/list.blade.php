@@ -22,7 +22,7 @@
       @foreach($home_audios AS $home_audio)
       <tr>
         <td><img src="{{$home_audio['hardware']['icon']}}" style="width: 40px;" /></td>
-        <td>{{$home_audio['title']}}</td>
+        <td><a href="/home-audios/{{$home_audio['id']}}">{{$home_audio['title']}}</a></td>
         <td>{{$home_audio['hardware']['brand']}} {{$home_audio['hardware']['modelid']}}</td>
         <td>{{$home_audio['room']['title']}}</td>
         <td style="text-align: right;">{{$home_audio['updated_at']}}</td>
@@ -30,7 +30,7 @@
         <td style="text-align: center;" id="mute-{{$home_audio['id']}}">
           <i class="fa fa-2x fa-volume-{{($home_audio['mute'] ? 'off text-danger' : 'up text-success')}}" aria-hidden="true" onclick="$.home_audios.push.mute_device('{{$home_audio['id']}}')" style="cursor: pointer;"></i>
         </td>
-        <td style="text-align: center;">
+        <td style="text-align: center;" id="power-{{$home_audio['id']}}">
           <i class="fa fa-2x fa-toggle-{{($home_audio['state_on'] ? 'on text-success' : 'off text-danger')}}" aria-hidden="true" onclick="$.home_audios.push.turn_on_device('{{$home_audio['id']}}')" style="cursor: pointer;"></i>
         </td>
       </tr>

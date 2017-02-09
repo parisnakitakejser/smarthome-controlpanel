@@ -19,6 +19,7 @@ elixir(function(mix) {
     'framework/chartjs-2.4.0/Chart.js',
     'framework/tether-1.3.3/tether.js',
     'framework/bootstrap4/bootstrap.js',
+    'framework/bootstrap4/bootstrap-slider.js',
     'framework/ajax_callback.js',
     'lib/users.js',
     'lib/rooms.js',
