@@ -112,8 +112,27 @@ class HomeAudios {
   }
 
   function handlerTurnOnDevice() {
+    $home_audio = ORM\MongoDB::findOne('home_audios', [
+      '_id' => new MongoDB\BSON\ObjectID($_POST['id'])
+    ]);
+
+    $response = ORM\Curl::exec([
+      'path' => 'home-audio/sonos/turn-on',
+      'postfield' => [
+        'ip' => $home_audio['network']['ip'],
+      ]
+    ]);
+
+    $response_json = json_decode($response);
+
+    if($response_json->status == 200) {
+      $status = 200;
+    } else {
+      $status = 404;
+    }
+
     return [
-      'status' => 200
+      'status' => $status
     ];
   }
 
