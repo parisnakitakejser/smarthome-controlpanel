@@ -10126,4 +10126,8 @@ body.modal-open {
   transform: rotate(-44deg);
 }
 
+h1.display-1 {
+  font-size: 46px;
+}
+
 /*# sourceMappingURL=app.css.map */
