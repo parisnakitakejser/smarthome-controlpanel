@@ -18,13 +18,19 @@
     </thead>
     <tbody>
       @foreach($lights AS $light)
-      <tr>
+      <tr style="@if($light['reachable'] == 0) opacity: 0.25; @endif">
         <td><img src="/images/philips-hue/{{$light['hardware']['icon']}}" class="img-responsive" /></td>
         <td>{{$light['title']}}</td>
         <td>{{$light['hardware']['brand']}} {{$light['hardware']['modelid']}}</td>
         <td>{{$light['room']['title']}}</td>
         <td style="text-align: right;">{{$light['updated_at']}}</td>
-        <td style="text-align: center;"><i class="fa fa-2x fa-toggle-{{($light['state_on'] ? 'on text-success' : 'off text-danger')}}" aria-hidden="true"></i></td>
+        <td style="text-align: center;">
+          @if($light['reachable'] == 0)
+            <i class="fa fa-2x fa-exclamation text-warning"></i>
+          @else
+            <i class="fa fa-2x fa-toggle-{{($light['state_on'] ? 'on text-success' : 'off text-danger')}}" aria-hidden="true"></i>
+          @endif
+        </td>
       </tr>
       @endforeach
     </tbody>

@@ -9,8 +9,9 @@ class Lights {
       $datetime = $utcdatetime->toDateTime();
 
       $data[] = [
-        'id' => $val['_id'],
-        'title' => (isset($val['title']) ? $val['title'] : 'untitled'),
+        'id' => (string) $val['_id'],
+        'light_id' => $val['id'],
+        'title' => (isset($val['name']) ? $val['name'] : 'untitled'),
         'room' => [
           'title' => (isset($val['room']['title']) ? $val['room']['title'] : 'no room assigned'),
           'id' => (isset($val['room']['id']) ? $val['room']['id'] : ''),
@@ -21,9 +22,15 @@ class Lights {
           'icon' => ORM\Hardware\PhilipsHue::getIcon($val['modelid']),
         ],
         'updated_at' => $datetime->format('Y-m-d H:i:s'),
-        'state_on' => $val['state']['on']
+        'state_on' => ($val['state']['reachable'] == true ? (int) $val['state']['on'] : 0),
+        'reachable' => (int) $val['state']['reachable']
       ];
     }
+
+    // echo '<pre>';
+    // print_r($data);
+    // echo '</pre>';
+    // exit();
 
     $blade = new Philo\Blade\Blade(BLADE_VIEWS, BLADE_CACHE);
     $bladeTemplate = 'lights.list';
