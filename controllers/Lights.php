@@ -55,6 +55,7 @@ class Lights {
     }
 
     $postfield = [];
+
     switch(strtolower($_POST['method'])) {
       case 'on':
         $postfield['num'] = $light['id'];
@@ -68,9 +69,7 @@ class Lights {
         'postfield' => $postfield
       ]);
 
-      // $response_json = json_decode($response);
-      print_r($response);
-      exit();
+      $response_json = json_decode($response)[0];
       if($response_json->status == 200) {
         $status = 200;
       } else {
