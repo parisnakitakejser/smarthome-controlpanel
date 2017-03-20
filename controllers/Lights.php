@@ -1,6 +1,18 @@
 <?php
 class Lights {
   function listAll() {
+    $blade = new Philo\Blade\Blade(BLADE_VIEWS, BLADE_CACHE);
+    $bladeTemplate = 'lights.list';
+    $bladeData = [
+      'meta' => [
+        'title' => 'Smarthome'
+      ]
+    ];
+
+    return $blade->view()->make($bladeTemplate, $bladeData)->render();
+  }
+
+  function getAll() {
     $lights = ORM\MongoDB::find('lights', []);
 
     $data = [];
@@ -27,16 +39,10 @@ class Lights {
       ];
     }
 
-    $blade = new Philo\Blade\Blade(BLADE_VIEWS, BLADE_CACHE);
-    $bladeTemplate = 'lights.list';
-    $bladeData = [
-      'meta' => [
-        'title' => 'Smarthome'
-      ],
-      'lights' => $data
+    return [
+      'content' => $data,
+      'status' => 200
     ];
-
-    return $blade->view()->make($bladeTemplate, $bladeData)->render();
   }
 
   function handlerControlAction() {

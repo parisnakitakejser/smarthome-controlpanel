@@ -16,24 +16,13 @@
         <th style="width: 60px;">On/Off</th>
       </tr>
     </thead>
-    <tbody id="contentList">
-      @foreach($lights AS $light)
-      <tr style="@if($light['reachable'] == 0) opacity: 0.25; @endif">
-        <td><img src="/images/philips-hue/{{$light['hardware']['icon']}}" class="img-responsive" /></td>
-        <td>{{$light['title']}}</td>
-        <td>{{$light['hardware']['brand']}} {{$light['hardware']['modelid']}}</td>
-        <td>{{$light['room']['title']}}</td>
-        <td style="text-align: right;">{{$light['updated_at']}}</td>
-        <td style="text-align: center;">
-          @if($light['reachable'] == 0)
-            <i class="fa fa-2x fa-exclamation text-warning"></i>
-          @else
-            <i id="light-icon-{{$light['id']}}" class="fa fa-2x fa-toggle-{{($light['state_on'] ? 'on text-success' : 'off text-danger')}}" onclick="$.lights.push.control_action('{{$light['id']}}','on','{{($light['state_on'] ? '0' : '1')}}')" style="cursor: pointer;"></i>
-          @endif
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
+    <tbody id="contentList"></tbody>
   </table>
 </div>
+@endsection
+
+@section('lazyload')
+<script>
+$(document).triggerHandler('pull-lights-pull-get_all:ready');
+</script>
 @endsection
