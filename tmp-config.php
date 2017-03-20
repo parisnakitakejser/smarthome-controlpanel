@@ -13,12 +13,12 @@ define('RESOURCES_PATH' , ROOT_PATH .'resources/');
 define('ORM_PATH' , RESOURCES_PATH .'orm/');
 
 # Database setup
-define( 'MONGODB_DB_HOST' , 'localhost' );
+define( 'MONGODB_DB_HOST' , '127.0.0.1' );
 define( 'MONGODB_DB_PORT' , '27017' );
 define( 'MONGODB_DB_NAME' , 'smarthome' );
 
 # Smarthome API server
-define( 'SMARTHOME_API_HOST' , '{api-host}' );
+define('REST_API_PHILIPS_HUE', 'http://127.0.0.1:9001/');
 
 # Mail settings - config
 define('MAIL_SMTP_SERVER', '{smtp-server}');

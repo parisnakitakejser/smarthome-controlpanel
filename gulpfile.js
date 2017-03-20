@@ -24,6 +24,7 @@ elixir(function(mix) {
     'lib/users.js',
     'lib/rooms.js',
     'lib/home_audios.js',
+    'lib/lights.js',
     'app.js'
   ], 'public/javascript/app.min.js')
 });

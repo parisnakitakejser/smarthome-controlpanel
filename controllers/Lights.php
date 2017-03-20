@@ -27,11 +27,6 @@ class Lights {
       ];
     }
 
-    // echo '<pre>';
-    // print_r($data);
-    // echo '</pre>';
-    // exit();
-
     $blade = new Philo\Blade\Blade(BLADE_VIEWS, BLADE_CACHE);
     $bladeTemplate = 'lights.list';
     $bladeData = [
@@ -42,6 +37,54 @@ class Lights {
     ];
 
     return $blade->view()->make($bladeTemplate, $bladeData)->render();
+  }
+
+  function handlerControlAction() {
+    $light = ORM\MongoDB::findOne('lights', [
+      '_id' => new MongoDB\BSON\ObjectID($_POST['id'])
+    ]);
+
+    switch(strtolower($light['manufacturer'])) {
+      case 'philips':
+        $url_path = REST_API_PHILIPS_HUE .'philips-hue/light';
+        break;
+
+      default:
+        $url_path = null;
+        break;
+    }
+
+    $postfield = [];
+    switch(strtolower($_POST['method'])) {
+      case 'on':
+        $postfield['num'] = $light['id'];
+        $postfield['on'] = ($_POST['value'] == 1 ? True : False);
+        break;
+    }
+
+    if($url_path !== null) {
+      $response = ORM\Curl::exec([
+        'path' => $url_path,
+        'postfield' => $postfield
+      ]);
+
+      // $response_json = json_decode($response);
+      print_r($response);
+      exit();
+      if($response_json->status == 200) {
+        $status = 200;
+      } else {
+        $status = 404;
+      }
+
+      return [
+        'status' => $status
+      ];
+    } else {
+      return [
+        'status' => 404
+      ];
+    }
   }
 }
 ?>

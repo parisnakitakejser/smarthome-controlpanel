@@ -28,7 +28,7 @@
           @if($light['reachable'] == 0)
             <i class="fa fa-2x fa-exclamation text-warning"></i>
           @else
-            <i class="fa fa-2x fa-toggle-{{($light['state_on'] ? 'on text-success' : 'off text-danger')}}" aria-hidden="true"></i>
+            <i class="fa fa-2x fa-toggle-{{($light['state_on'] ? 'on text-success' : 'off text-danger')}}" onclick="$.lights.push.control_action('{{$light['id']}}','on','{{($light['state_on'] ? '0' : '1')}}')" style="cursor: pointer;"></i>
           @endif
         </td>
       </tr>
