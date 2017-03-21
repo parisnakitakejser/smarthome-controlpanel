@@ -12,6 +12,28 @@ class Lights {
     return $blade->view()->make($bladeTemplate, $bladeData)->render();
   }
 
+  function view($id) {
+    $light = ORM\MongoDB::findOne('lights', [
+      '_id' => new MongoDB\BSON\ObjectID($id)
+    ]);
+
+    if(isset($light['_id'])) {
+      $blade = new Philo\Blade\Blade(BLADE_VIEWS, BLADE_CACHE);
+      $bladeTemplate = 'lights.view';
+      $bladeData = [
+        'meta' => [
+          'title' => 'Smarthome'
+        ],
+        'light' => $light
+      ];
+
+      return $blade->view()->make($bladeTemplate, $bladeData)->render();
+    } else {
+      header('location: /');
+      exit();
+    }
+  }
+
   function getAll() {
     $lights = ORM\MongoDB::find('lights', []);
 
@@ -67,6 +89,11 @@ class Lights {
         $postfield['num'] = $light['id'];
         $postfield['on'] = ($_POST['value'] == 1 ? True : False);
         break;
+
+      case 'name':
+        $postfield['num'] = $light['id'];
+        $postfield['name'] = $_POST['value'];
+        break;
     }
 
     if($url_path !== null) {
@@ -74,7 +101,7 @@ class Lights {
         'path' => $url_path,
         'postfield' => $postfield
       ]);
-
+      
       $response_json = json_decode($response)[0];
       if($response_json->status == 200) {
         $status = 200;

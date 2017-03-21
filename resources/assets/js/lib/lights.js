@@ -54,7 +54,13 @@ $.lights = {
               )
               .append(
                 $(document.createElement('td'))
-                .html(val.title)
+                .append(
+                  $(document.createElement('a'))
+                  .attr({
+                    'href' : 'light/'+ val.id
+                  })
+                  .html(val.title)
+                )
               )
               .append(
                 $(document.createElement('td'))

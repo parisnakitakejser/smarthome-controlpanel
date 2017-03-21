@@ -9,6 +9,7 @@ if(isset($_SESSION['user'])) {
   $app['router']->get('/rooms/view/{id}', 'Rooms@view');
 
   $app['router']->get('/lights', 'Lights@listAll');
+  $app['router']->get('/light/{id}', 'Lights@view');
   $app['router']->post('/lights/get-all', 'Lights@getAll');
   $app['router']->post('/lights/handler/control-action', 'Lights@handlerControlAction');
 
